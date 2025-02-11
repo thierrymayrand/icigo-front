@@ -2,5 +2,15 @@
   "buildCommand": "pnpm run build",
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install",
-  "framework": "vite"
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/prestataires/:path*",
+      "destination": "http://localhost:5088/prestataires/:path*"
+    },
+    {
+      "source": "/activitees/:path*",
+      "destination": "http://localhost:5088/activitees/:path*"
+    }
+  ]
 } 
