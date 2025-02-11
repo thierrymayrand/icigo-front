@@ -51,6 +51,8 @@ interface ActivityFilters {
   location: string;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export function Activities() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -68,7 +70,7 @@ export function Activities() {
   const fetchActivities = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('/activitees', {
+      const response = await fetch(`${API_URL}/activitees`, {
         headers: {
           'Accept': 'application/json'
         }

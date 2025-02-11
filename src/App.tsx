@@ -38,6 +38,8 @@ interface Filters {
 
 type Page = 'dashboard' | 'providers' | 'activities';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('dashboard');
   const [isAdding, setIsAdding] = useState(false);
@@ -55,7 +57,7 @@ function App() {
   const fetchProviders = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('/prestataires', {
+      const response = await fetch(`${API_URL}/prestataires`, {
         headers: {
           'Accept': 'application/json'
         }
