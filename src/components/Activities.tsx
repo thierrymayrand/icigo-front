@@ -72,8 +72,10 @@ export function Activities() {
       setIsLoading(true);
       const response = await fetch(`${API_URL}/activitees`, {
         headers: {
-          'Accept': 'application/json'
-        }
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors'
       });
       if (!response.ok) {
         throw new Error('Failed to fetch activities');
