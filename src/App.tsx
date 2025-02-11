@@ -57,6 +57,7 @@ function App() {
   const fetchProviders = async () => {
     try {
       setIsLoading(true);
+      console.log('Fetching providers from:', `${API_URL}/prestataires`);
       const response = await fetch(`${API_URL}/prestataires`, {
         headers: {
           'Accept': 'application/json',
@@ -64,10 +65,12 @@ function App() {
         },
         mode: 'cors'
       });
+      console.log('Provider response status:', response.status);
       if (!response.ok) {
         throw new Error('Failed to fetch providers');
       }
       const data = await response.json();
+      console.log('Provider data received:', data);
       // Map API data to our Provider interface
       const mappedData = Array.isArray(data) ? data.map((item: any) => ({
         id: item.id,
@@ -76,8 +79,10 @@ function App() {
         telephone: item.telephone,
         nomSociete: item.nomSociete
       })) : [];
+      console.log('Mapped provider data:', mappedData);
       setProviders(mappedData);
     } catch (err) {
+      console.error('Error in fetchProviders:', err);
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsLoading(false);

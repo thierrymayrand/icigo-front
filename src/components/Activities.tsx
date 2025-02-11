@@ -70,6 +70,7 @@ export function Activities() {
   const fetchActivities = async () => {
     try {
       setIsLoading(true);
+      console.log('Fetching activities from:', `${API_URL}/activitees`);
       const response = await fetch(`${API_URL}/activitees`, {
         headers: {
           'Accept': 'application/json',
@@ -77,12 +78,15 @@ export function Activities() {
         },
         mode: 'cors'
       });
+      console.log('Activities response status:', response.status);
       if (!response.ok) {
         throw new Error('Failed to fetch activities');
       }
       const data = await response.json();
+      console.log('Activities data received:', data);
       // Extract activities array from the response
       const activitiesData = data.activitees || [];
+      console.log('Extracted activities:', activitiesData);
       // Map API data to our Activity interface
       const mappedData = activitiesData.map((item: any) => ({
         id: item.id,
@@ -98,9 +102,10 @@ export function Activities() {
         saisons: item.saisons || [],
         periodesIndisponibles: item.periodesIndisponibles || []
       }));
+      console.log('Mapped activities data:', mappedData);
       setActivities(mappedData);
     } catch (error) {
-      console.error('Error fetching activities:', error);
+      console.error('Error in fetchActivities:', error);
       setError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
       setIsLoading(false);
