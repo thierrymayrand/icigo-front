@@ -80,10 +80,17 @@ export function Activities() {
         mode: 'cors'
       });
       console.log('Activities response status:', response.status);
+      
+      // Add this debug code
+      const text = await response.text();
+      console.log('Raw response:', text);
+      
       if (!response.ok) {
         throw new Error('Failed to fetch activities');
       }
-      const data = await response.json();
+      
+      // Parse the text manually
+      const data = text ? JSON.parse(text) : null;
       console.log('Activities data received:', data);
       // Extract activities array from the response
       const activitiesData = data.activitees || [];

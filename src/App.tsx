@@ -67,10 +67,15 @@ function App() {
         mode: 'cors'
       });
       console.log('Provider response status:', response.status);
+      
+      const text = await response.text();
+      console.log('Raw response:', text);
+      
       if (!response.ok) {
         throw new Error('Failed to fetch providers');
       }
-      const data = await response.json();
+      
+      const data = text ? JSON.parse(text) : null;
       console.log('Provider data received:', data);
       // Map API data to our Provider interface
       const mappedData = Array.isArray(data) ? data.map((item: any) => ({

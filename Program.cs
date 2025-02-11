@@ -16,7 +16,10 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Use CORS before other middleware
+// Add this first, before any other middleware
 app.UseCors("AllowVercel");
 
-// ... other middleware 
+// Then your other middleware
+app.UseHttpsRedirection();
+app.UseAuthorization();
+// etc... 
