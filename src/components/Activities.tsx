@@ -74,7 +74,8 @@ export function Activities() {
       const response = await fetch(`${API_URL}/activitees`, {
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
         },
         mode: 'cors'
       });

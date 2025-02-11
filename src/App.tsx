@@ -61,7 +61,8 @@ function App() {
       const response = await fetch(`${API_URL}/prestataires`, {
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
         },
         mode: 'cors'
       });
